@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack:///./src/index.less"],"names":[],"mappings":"AAAA;AACA;AACA;AACA","file":"css/main.css","sourcesContent":["body {\n  background: url(/assets/WechatIMG1_9a650c.jpg);\n  transition: all 2s;\n}\n"],"sourceRoot":""}
