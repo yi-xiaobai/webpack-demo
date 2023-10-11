@@ -6,3 +6,4 @@ B();
 import("./lib/c").then((res) => {
   console.log("==>Get res", res);
 });
+

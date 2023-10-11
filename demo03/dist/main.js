@@ -43,9 +43,6 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-                //* __webpack_require__.p 上面是空字符串
-                //* chunkId = 0 顾{}[0] || 0 最终的值是0  
-                //* return 0.js   
 /******/ 		return __webpack_require__.p + "" + ({}[chunkId]||chunkId) + ".js"
 /******/ 	}
 /******/
@@ -80,8 +77,9 @@
 /******/
 /******/
 /******/ 		// JSONP chunk loading for javascript
-/******/
+/******/        //* chunkId = 0
 /******/ 		var installedChunkData = installedChunks[chunkId];
+                //* installedChunkData = installedChunks[0] = undefined
 /******/ 		if(installedChunkData !== 0) { // 0 means "already installed".
 /******/
 /******/ 			// a Promise means "currently loading".
@@ -89,13 +87,16 @@
 /******/ 				promises.push(installedChunkData[2]);
 /******/ 			} else {
 /******/ 				// setup Promise in chunk cache
+
+                        //* 创建promise对象
 /******/ 				var promise = new Promise(function(resolve, reject) {
 /******/ 					installedChunkData = installedChunks[chunkId] = [resolve, reject];
 /******/ 				});
 /******/ 				promises.push(installedChunkData[2] = promise);
 /******/
+
+                        //* 创建srcipt标签
 /******/ 				// start chunk loading
-                        //* 创建一个script标签
 /******/ 				var script = document.createElement('script');
 /******/ 				var onScriptComplete;
 /******/
@@ -104,8 +105,7 @@
 /******/ 				if (__webpack_require__.nc) {
 /******/ 					script.setAttribute("nonce", __webpack_require__.nc);
 /******/ 				}
-
-                        //* 文件名  0.js
+                        //* 文件名是 0.js
 /******/ 				script.src = jsonpScriptSrc(chunkId);
 /******/
 /******/ 				// create error before stack unwound to get useful stacktrace later
@@ -132,6 +132,7 @@
 /******/ 					onScriptComplete({ type: 'timeout', target: script });
 /******/ 				}, 120000);
 /******/ 				script.onerror = script.onload = onScriptComplete;
+                        //* 添加script标签
 /******/ 				document.head.appendChild(script);
 /******/ 			}
 /******/ 		}
@@ -193,6 +194,7 @@
 /******/ 	// on error function for async loading
 /******/ 	__webpack_require__.oe = function(err) { console.error(err); throw err; };
 /******/
+            //* 0.js中 windos["webpackJsonp"] = [[0],{ ".lib/c.js":function(){} }]
 /******/ 	var jsonpArray = window["webpackJsonp"] = window["webpackJsonp"] || [];
 /******/ 	var oldJsonpFunction = jsonpArray.push.bind(jsonpArray);
 /******/ 	jsonpArray.push = webpackJsonpCallback;
@@ -239,7 +241,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _lib_a__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./lib/a */ \"./lib/a.js\");\n/* harmony import */ var _lib_b__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./lib/b */ \"./lib/b.js\");\n\n\nconsole.log(_lib_a__WEBPACK_IMPORTED_MODULE_0__[\"A\"]);\nObject(_lib_b__WEBPACK_IMPORTED_MODULE_1__[\"default\"])();\n\n__webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ./lib/c */ \"./lib/c.js\")).then((res) => {\n  console.log(\"==>Get res\", res);\n});\n\n\n//# sourceURL=webpack:///./main.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _lib_a__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./lib/a */ \"./lib/a.js\");\n/* harmony import */ var _lib_b__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./lib/b */ \"./lib/b.js\");\n\n\nconsole.log(_lib_a__WEBPACK_IMPORTED_MODULE_0__[\"A\"]);\nObject(_lib_b__WEBPACK_IMPORTED_MODULE_1__[\"default\"])();\n\n__webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ./lib/c */ \"./lib/c.js\")).then((res) => {\n  console.log(\"==>Get res\", res);\n});\n\n\n\n//# sourceURL=webpack:///./main.js?");
 
 /***/ })
 
