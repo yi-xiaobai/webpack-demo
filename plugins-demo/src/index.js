@@ -1,3 +1,5 @@
+import { SlotMachine } from "lucky-canvas";
+
 function loaders() {
   this.name = "yyds";
   this.age = 18;
